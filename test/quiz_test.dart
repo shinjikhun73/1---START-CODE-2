@@ -20,10 +20,7 @@ main() {
       Question(title: "5+2*3-7", choices: ["4", "5", "3"], goodChoice: "4");
   Quiz quiz = Quiz(questions: [q1, q2]);
 
-  Question q5 =
-      Question(title: "5+2*3-7", choices: ["4", "5", "3"], goodChoice: "4");
-  Quiz quiz = Quiz(questions: [q1, q2]);
-
+  
   test('All answers are good (100%)', () {
     // Create the answer here
     Answer a1 = Answer(question: q1, answerChoice: "4");
