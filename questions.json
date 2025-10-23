@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "title": "Capital of France?",
+      "choices": ["Paris", "London", "Rome"],
+      "goodChoice": "Paris",
+      "points": 10
+    },
+    {
+      "id": "q2",
+      "title": "2+2 = ?",
+      "choices": ["2", "4", "5"],
+      "goodChoice": "4",
+      "points": 50
+    },
+    {
+      "id": "q3",
+      "title": "Capital city of Cambodia?",
+      "choices": ["Prey Veng", "Phnom Penh", "Siem Reap"],
+      "goodChoice": "Phnom Penh",
+      "points": 20
+    },
+    {
+      "id": "q4",
+      "title": "5+2*3-7",
+      "choices": ["4", "5", "3"],
+      "goodChoice": "4",
+      "points": 20
+    },
+    {
+      "id": "q5",
+      "title": "2+2+2+3",
+      "choices": ["8", "9", "10"],
+      "goodChoice": "10",
+      "points": 20
+    }
+  ]
+}

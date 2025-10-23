@@ -1,35 +1,35 @@
 import 'dart:io';
-
 import '../domain/quiz.dart';
 
 class QuizConsole {
-  Quiz quiz;
+  final Quiz quiz;
+  final Player player;
 
-  QuizConsole({required this.quiz});
+  QuizConsole({required this.quiz, required this.player});
 
   void startQuiz() {
-    print('--- Welcome to the Quiz ---\n');
-
     for (var question in quiz.questions) {
-      print('Question: ${question.title}');
-      print('Choices: ${question.choices}');
-      stdout.write('Your answer: ');
-      String? userInput = stdin.readLineSync();
-
-      // Check for null input
-      if (userInput != null && userInput.isNotEmpty) {
-        Answer answer = Answer(question: question, answerChoice: userInput);
-        quiz.addAnswer(answer);
-      } else {
-        print('No answer entered. Skipping question.');
+      print('\n${question.title} - (${question.points} points)');
+      for (var i = 0; i < question.choices.length; i++) {
+        print('${i + 1}. ${question.choices[i]}');
       }
 
-      print('');
+      final input = stdin.readLineSync();
+      final index = int.tryParse(input ?? '') ?? -1;
+      if (index >= 1 && index <= question.choices.length) {
+        player.addAnswer(Answer(
+          questionId: question.id,
+          answerChoice: question.choices[index - 1],
+        ));
+      } else {
+        print('Invalid choice. Skipping...');
+      }
     }
 
-    int score = quiz.getScoreInPercentage();
-    print('--- Quiz Finished ---');
-    print('Your score: $score % correct');
+    final score = player.getScoreInPoints(quiz.questions);
+    final percent = player.getScoreInPercentage(quiz.questions);
+    print('\n${player.name}, your score in percentage: ${percent.toStringAsFixed(1)} %');
+    print('${player.name}, your score in points: $score');
   }
 }
- 
+

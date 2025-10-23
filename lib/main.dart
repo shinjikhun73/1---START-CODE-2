@@ -1,30 +1,35 @@
- 
-import 'domain/quiz.dart';
-import 'ui/quiz_console.dart';
+import 'dart:io';
+import 'package:my_first_project/data/quiz_file_provider.dart';
+import 'package:my_first_project/domain/quiz.dart';
+import 'package:my_first_project/ui/quiz_console.dart';
 
 void main() {
+  final repo = QuizRepository('questions.json');
+  final quiz = repo.read();
 
-  List<Question> questions = [
-    Question(
-        title: "Capital of France?",
-        choices: ["Paris", "London", "Rome"],
-        goodChoice: "Paris"),
-    Question(
-        title: "2 + 2 = ?", 
-        choices: ["2", "4", "5"], 
-        goodChoice: "4"),
-    Question(
-      title: "Capital city of Cambodia?",
-      choices: ["Prey Veng", "Phnom Penh", "Siem Reap"],
-      goodChoice: "Phnom Penh"),
-    Question(title: "5+2*3-7", choices: ["4", "5", "3"], goodChoice: "4")
+  final List<Player> players = [];
 
-  ];
-  
+  print('Welcome to the Quiz ---');
 
+  while (true) {
+    stdout.write('\nYour name: ');
+    final name = stdin.readLineSync();
+    if (name == null || name.isEmpty) break;
 
-  Quiz quiz = Quiz(questions: questions);
-  QuizConsole console = QuizConsole(quiz: quiz);
+    final player = Player(name: name);
+    final console = QuizConsole(quiz: quiz, player: player);
+    console.startQuiz();
 
-  console.startQuiz();
+    players.removeWhere((p) => p.name == name);
+    players.add(player);
+
+    print('\nScores so far:');
+    for (var p in players) {
+      final score = p.getScoreInPoints(quiz.questions);
+      final percent = p.getScoreInPercentage(quiz.questions);
+      print('Player: ${p.name} | Score: $score (${percent.toStringAsFixed(1)}%)');
+    }
+  }
+
+  print('\nQuiz Finished');
 }
