@@ -20,7 +20,9 @@ main() {
       Question(title: "5+2*3-7", choices: ["4", "5", "3"], goodChoice: "4");
   Quiz quiz = Quiz(questions: [q1, q2]);
 
-  
+  Question q5 =
+      Question(title: "5+2*3-7", choices: ["4", "5", "3"], goodChoice: "4");
+  Quiz quiz = Quiz(questions: [q1, q2]);
 
   test('All answers are good (100%)', () {
     // Create the answer here
@@ -28,8 +30,9 @@ main() {
     Answer a2 = Answer(question: q2, answerChoice: "5");
     Answer a3 = Answer(question: q3, answerChoice: "Phnom Penh");
     Answer a4 = Answer(question: q4, answerChoice: "4");
+    Answer a5 = Answer(question: q5, answerChoice: "4");
 
-    quiz.answers = [a1, a2, a3, a4];
+    quiz.answers = [a1, a2, a3, a4, a5];
 
     // Check something
     expect(quiz.getScoreInPercentage(), equals(200));
