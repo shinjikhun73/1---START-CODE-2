@@ -27,7 +27,7 @@ void main() {
     for (var p in players) {
       final score = p.getScoreInPoints(quiz.questions);
       final percent = p.getScoreInPercentage(quiz.questions);
-      print('Player: ${p.name} | Score: $score (${percent.toStringAsFixed(1)}%)');
+      print('Player: ${p.name}  Score: $score (${percent.toStringAsFixed(1)}%)');
     }
   }
 
